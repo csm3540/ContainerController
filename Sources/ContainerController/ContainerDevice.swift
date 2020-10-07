@@ -8,7 +8,6 @@
 
 import UIKit
 
-@available(iOS 13.0, *)
 public extension ContainerDevice {
     
     enum Orientation {
@@ -18,7 +17,7 @@ public extension ContainerDevice {
     }
 }
 
-@available(iOS 13.0, *)
+
 open class ContainerDevice {
     
     // MARK: - Size
@@ -63,9 +62,14 @@ open class ContainerDevice {
     // MARK: - StatusBar Height
     
     class public var statusBarHeight: CGFloat {
+        #warning("수정")
         var height: CGFloat = 0
-        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-        height = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        if #available(iOS 13.0, *) {
+            let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+            height = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        } else {
+            height = UIApplication.shared.statusBarFrame.height
+        }
         return height
     }
     
@@ -95,14 +99,23 @@ open class ContainerDevice {
     
     class var statusBarOrientation: UIInterfaceOrientation? {
         get {
-            guard let orientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation else {
-                #if DEBUG
-                fatalError("Could not obtain UIInterfaceOrientation from a valid windowScene")
-                #else
-                return nil
-                #endif
+            if #available(iOS 13.0, *) {
+                guard let orientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation else {
+                    #if DEBUG
+                    fatalError("Could not obtain UIInterfaceOrientation from a valid windowScene")
+                    #else
+                    return nil
+                    #endif
+                }
+                return orientation
+            } else {
+                #warning("수정")
+                if UIApplication.shared.statusBarOrientation.isLandscape {
+                    return .landscapeLeft
+                } else {
+                    return .portrait
+                }
             }
-            return orientation
         }
     }
     

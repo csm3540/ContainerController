@@ -8,7 +8,6 @@
 
 import UIKit
 
-@available(iOS 13.0, *)
 open class ContainerController: NSObject {
     
     // MARK: Views
@@ -366,7 +365,8 @@ open class ContainerController: NSObject {
     private func createContainerView() {
         let frame = CGRect(x: 0, y: 0, width: deviceWidth, height: deviceHeight * 2)
         view = ContainerView(frame: frame)
-        view.backgroundColor = .systemBackground
+        #warning("컬러수정")
+        view.backgroundColor = .clear//.systemBackground
         controller?.view.addSubview(view)
         
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
@@ -1091,7 +1091,6 @@ open class ContainerController: NSObject {
 
 // MARK: - Gesture Delegate
 
-@available(iOS 13.0, *)
 extension ContainerController: UIGestureRecognizerDelegate {
     
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -1102,7 +1101,6 @@ extension ContainerController: UIGestureRecognizerDelegate {
 
 // MARK: - Table Delegate
 
-@available(iOS 13.0, *)
 extension ContainerController: UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -1122,7 +1120,6 @@ extension ContainerController: UITableViewDelegate {
 
 // MARK: - Table DataSource
 
-@available(iOS 13.0, *)
 extension ContainerController: UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -1155,7 +1152,6 @@ extension ContainerController: UITableViewDataSource {
 
 // MARK: - Collection Delegate
 
-@available(iOS 13.0, *)
 extension ContainerController: UICollectionViewDelegate {
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -1168,7 +1164,6 @@ extension ContainerController: UICollectionViewDelegate {
 
 // MARK: - Collection DataSource
 
-@available(iOS 13.0, *)
 extension ContainerController: UICollectionViewDataSource {
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -1188,7 +1183,6 @@ extension ContainerController: UICollectionViewDataSource {
 
 // MARK: - Collection DelegateFlowLayout
 
-@available(iOS 13.0, *)
 extension ContainerController: UICollectionViewDelegateFlowLayout {
 
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -1201,7 +1195,6 @@ extension ContainerController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - Scroll Delegate
 
-@available(iOS 13.0, *)
 extension ContainerController: UIScrollViewDelegate {
     
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {

@@ -8,7 +8,6 @@
 
 import UIKit
 
-@available(iOS 13.0, *)
 open class ContainerView: UIView {
     
     public var contentView: UIView?
@@ -59,12 +58,14 @@ open class ContainerView: UIView {
     
     // MARK: Add Blur
     
+    #warning("주석")
+    /*
     public func addBlur(darkStyle: Bool) {
         let style: UIBlurEffect.Style = darkStyle ? .systemThinMaterialDark : .systemChromeMaterialLight
         backgroundColor = .clear
         addBlur(style: style)
     }
-
+*/
     public func addBlur(style: UIBlurEffect.Style) {
         
         if visualEffectView == nil {
